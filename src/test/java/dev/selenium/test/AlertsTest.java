@@ -1,10 +1,11 @@
 package dev.selenium.test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -15,12 +16,16 @@ public class AlertsTest {
         driver.get("https://demoqa.com/alerts");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         //simple alert/alert
-        driver.findElement(By.id("alertButton")).click();
-        Thread.sleep(200);
+        WebElement webElement = driver.findElement(By.id("alertButton"));
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        webElement.click();
+        wait.until(ExpectedConditions.alertIsPresent());
+//        Thread.sleep(200);
         driver.switchTo().alert().accept();
-        Thread.sleep(200);
+//        Thread.sleep(200);
 
 
         //confirmButton

@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Set;
@@ -15,6 +16,8 @@ public class WindowsTest {
         WebDriver driver = new FirefoxDriver();
         driver.get("https://demoqa.com/browser-windows");
         driver.manage().window().maximize();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
         String originalWindow = driver.getWindowHandle();
@@ -41,7 +44,11 @@ public class WindowsTest {
         driver.switchTo().window(originalWindow);
 
         Thread.sleep(2000);
-        driver.quit();
+        driver.close();
+        if (driver.findElements(By.id("sampleHeading")).size() != 0) {
+            driver.findElement(By.id("sampleHeading")).click();
+        }
+
 
     }
 }
