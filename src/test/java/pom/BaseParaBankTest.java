@@ -40,7 +40,7 @@ public abstract class BaseParaBankTest {
         String browserName = getBrowserName();
         if (browserName.equals("firefox")) {
             //logging disable
-//            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
+            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
 
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
@@ -48,15 +48,15 @@ public abstract class BaseParaBankTest {
         } else if (browserName.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
-        } else {
+        } else if (browserName.equals("headless")) {
                 //disable Firefox logging
-//            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
+            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
 
             WebDriverManager.firefoxdriver().setup();
             //headless
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setHeadless(true);
-//            firefoxOptions.addArguments("-headless");
+//            firefoxOptions.setHeadless(true);
+            firefoxOptions.addArguments("-headless");
             driver = new FirefoxDriver(firefoxOptions);
 
         }
@@ -84,7 +84,7 @@ public abstract class BaseParaBankTest {
 
     @AfterMethod
     public void tearDown() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(8000);
         driver.quit();
     }
 

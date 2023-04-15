@@ -1,7 +1,6 @@
 package pom.test;
 
 import com.parabank.pom.BaseParaBankTest;
-import com.parabank.pom.pages.HomePage;
 import com.parabank.pom.pages.LoginPage;
 import com.parabank.pom.pages.OpenAccountPage;
 import org.testng.Assert;
